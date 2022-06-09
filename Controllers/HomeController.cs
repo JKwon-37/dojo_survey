@@ -9,15 +9,25 @@ public class HomeController : Controller
     }
 
     [HttpPost("/method")]
-    public RedirectToActionResult Method()
+    public RedirectToActionResult Method(string Name, string Location, string Language, string Comments)
     {
-        return RedirectToAction("Result", "Result");
+        return RedirectToAction("Result", new
+        {
+            Name = Name,
+            Location = Location,
+            Language = Language,
+            Comments = Comments
+        });
     }
 
     [HttpGet("/result")]
-    public ViewResult Result ()
+    public ViewResult Result (string Name, string Location, string Language, string Comments)
     {
-        return View();
+        ViewBag.Name = Name;
+        ViewBag.Location = Location;
+        ViewBag.Language = Language;
+        ViewBag.Comments = Comments;
+        return View("Result");
     }
 
 
